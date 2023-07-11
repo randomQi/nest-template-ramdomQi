@@ -57,7 +57,23 @@ $ pnpm run test:e2e
 # test coverage
 $ pnpm run test:cov
 ```
+## 环境配置
 
+安装第三方依赖库config
+
+```bash
+npm i config
+```
+
+支持yaml文件格式
+```bash
+npm i js-yaml
+```
+
+## 使用nestjs 官方配置config库
+```bash
+npm i @nestjs/config
+```
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
