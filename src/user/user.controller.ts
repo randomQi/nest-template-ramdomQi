@@ -3,13 +3,14 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ConfigService} from "@nestjs/config";
+import { User } from "./entities/user.entity";
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService, private  readonly configService: ConfigService) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
+  create(@Body() createUserDto: Partial<User>) {
     console.log(createUserDto);
     return this.userService.create(createUserDto);
   }
@@ -26,7 +27,7 @@ export class UserController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  update(@Param('id') id: string, @Body() updateUserDto: Partial<User>) {
     return this.userService.update(+id, updateUserDto);
   }
 
