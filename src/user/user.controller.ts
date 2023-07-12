@@ -16,7 +16,7 @@ export class UserController {
 
   @Get()
   findAll() {
-    console.log(this.configService.get('db'));
+    console.log(this.configService.get('mysql'));
     return this.userService.findAll();
   }
 

@@ -69,7 +69,11 @@ npm i config
 ```bash
 npm i js-yaml
 ```
-
+## 接入数据库
+接入MySQL数据库需要安装以下依赖项
+```bash
+npm i @nestjs/typeorm typrorm mysql2
+```
 ## 使用nestjs 官方配置config库
 ```bash
 npm i @nestjs/config
