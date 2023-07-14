@@ -1,9 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseGuards } from "@nestjs/common";
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { ConfigService} from "@nestjs/config";
 import { User } from "./entities/user.entity";
+import { AuthGuard } from "@nestjs/passport";
 
 @Controller('user')
 export class UserController {
@@ -16,14 +15,20 @@ export class UserController {
   }
 
   @Get()
-  findAll() {
-    console.log(this.configService.get('mysql'));
-    return this.userService.findAll();
+  findAll(@Query('username') username: string) {
+    console.log(username);
+    return this.userService.findAll(username);
   }
-
+  @UseGuards(AuthGuard('jwt'))
+  @Get('/profile')
+  getUserProfile(@Query("id") id:number) {
+    console.log(id);
+    return this.userService.getUserProfile(id)
+  }
+  @UseGuards(AuthGuard('jwt'))
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
+  async findOne(@Param('id') id: number) {
+    return await this.userService.findOne({ id })
   }
 
   @Patch(':id')

@@ -14,6 +14,7 @@ import { LogsModule } from './logs/logs.module';
 import { RolesModule } from './roles/roles.module';
 import { Role } from "./roles/entities/role.entity";
 import { Log } from "./logs/entities/log.entity";
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [UserModule, MenuModule, ConfigModule.forRoot({isGlobal: true, load: [Configuration]}),
     TypeOrmModule.forRootAsync({
@@ -46,7 +47,8 @@ import { Log } from "./logs/entities/log.entity";
     //   })],
     ProfileModule,
     LogsModule,
-    RolesModule],
+    RolesModule,
+    AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

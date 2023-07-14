@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Get, Injectable } from "@nestjs/common";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { InjectRepository } from "@nestjs/typeorm";
 import { User } from "./entities/user.entity";
@@ -13,12 +13,12 @@ export class UserService {
     return  await this.userRepository.insert(createUserDto)
   }
 
-  findAll() {
-    return this.userRepository.find();
+  findAll(username:string):Promise<User[]> {
+    return this.userRepository.find({ where: {username}});
   }
 
-  findOne(id: number) {
-    return this.userRepository.findOne({ where: {id}});
+  async findOne(parm: Partial<{ id: number, username: string }>):Promise<User> {
+    return await this.userRepository.findOne({ where: parm });
   }
 
   update(id: number, updateUserDto: Partial<User>) {
@@ -27,5 +27,9 @@ export class UserService {
 
   remove(id: number) {
     return this.userRepository.delete(id);
+  }
+
+  getUserProfile(id: number) {
+    return this.userRepository.findOne({where: {id}, relations: {profile: true}})
   }
 }
