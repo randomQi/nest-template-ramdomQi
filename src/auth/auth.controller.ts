@@ -14,9 +14,6 @@ export class AuthController {
 
   @Post('signup')
   async signup(@Body() dto: any) {
-    const {username} = dto
-    let promise = await this.userService.findAll(username);
-    console.log(promise);
     return this.authService.signup(dto)
   }
 }

@@ -1,7 +1,7 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { ForbiddenException, Injectable, UnauthorizedException } from "@nestjs/common";
 import { UserService } from "../user/user.service";
 import { JwtService } from "@nestjs/jwt";
-
+import * as argon2 from 'argon2';
 @Injectable()
 export class AuthService {
   constructor(private readonly userService: UserService, private readonly jwtService:JwtService) {
@@ -9,12 +9,24 @@ export class AuthService {
   async signin(dto: any) {
     const { username, password } = dto
     const promise = await this.userService.findOne({ username });
-    if (password === promise.password) {
+    if (!promise) {
+      throw new ForbiddenException('用户不存在，请注册！！！')
+    }
+    const booleanPromise = await argon2.verify(promise.password,password);
+    if (!booleanPromise) {
+      throw new ForbiddenException('用户名或密码错误！！！！')
+    }else {
       return  await  this.jwtService.signAsync({username: promise.username, sub: promise.id})
     }
-    throw new UnauthorizedException()
   }
-  signup(dto: any){
-    return '你的注册信息是：' + JSON.stringify(dto)
+  async signup(dto: any) {
+    const { username } = dto
+    let promise = await this.userService.findOne({ username });
+    if (promise?.username === username) {
+      throw new ForbiddenException('用户名已存在')
+    }
+    dto.password = await argon2.hash(dto.password)
+    await this.userService.create(dto);
+    return '注册成功'
   }
 }
