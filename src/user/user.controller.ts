@@ -3,6 +3,8 @@ import { UserService } from './user.service';
 import { ConfigService} from "@nestjs/config";
 import { User } from "./entities/user.entity";
 import { AuthGuard } from "@nestjs/passport";
+import { AdminGuard } from "../guards/admin/admin.guard";
+import { JwtGuard } from "../guards/jwt/jwt.guard";
 
 @Controller('user')
 export class UserController {
@@ -19,13 +21,16 @@ export class UserController {
     console.log(username);
     return this.userService.findAll(username);
   }
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(JwtGuard,AdminGuard)
+  // @UseGuards(AuthGuard('jwt'))
   @Get('/profile')
   getUserProfile(@Query("id") id:number) {
     console.log(id);
     return this.userService.getUserProfile(id)
   }
-  @UseGuards(AuthGuard('jwt'))
+
+  // @UseGuards(AuthGuard('jwt'))
+  @UseGuards(JwtGuard)
   @Get(':id')
   async findOne(@Param('id') id: number) {
     return await this.userService.findOne({ id })
