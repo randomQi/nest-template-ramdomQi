@@ -17,6 +17,7 @@ specifiers:
   '@types/js-yaml': ^4.0.5
   '@types/node': ^20.3.1
   '@types/passport-jwt': ^3.0.9
+  '@types/request-ip': ^0.0.38
   '@types/supertest': ^2.0.12
   '@typescript-eslint/eslint-plugin': ^5.59.11
   '@typescript-eslint/parser': ^5.59.11
@@ -33,6 +34,7 @@ specifiers:
   passport-jwt: ^4.0.1
   prettier: ^2.8.8
   reflect-metadata: ^0.1.13
+  request-ip: ^3.3.0
   rxjs: ^7.8.1
   source-map-support: ^0.5.21
   supertest: ^6.3.3
@@ -62,6 +64,7 @@ dependencies:
   passport: registry.npmmirror.com/passport/0.6.0
   passport-jwt: registry.npmmirror.com/passport-jwt/4.0.1
   reflect-metadata: registry.npmmirror.com/reflect-metadata/0.1.13
+  request-ip: registry.npmmirror.com/request-ip/3.3.0
   rxjs: registry.npmmirror.com/rxjs/7.8.1
   typeorm: registry.npmmirror.com/typeorm/0.3.17_amo3zwxalcysdjhsk2zeh25abe
 
@@ -72,6 +75,7 @@ devDependencies:
   '@types/express': registry.npmmirror.com/@types/express/4.17.17
   '@types/jest': registry.npmmirror.com/@types/jest/29.5.2
   '@types/node': registry.npmmirror.com/@types/node/20.3.1
+  '@types/request-ip': registry.npmmirror.com/@types/request-ip/0.0.38
   '@types/supertest': registry.npmmirror.com/@types/supertest/2.0.12
   '@typescript-eslint/eslint-plugin': registry.npmmirror.com/@typescript-eslint/eslint-plugin/5.60.0_6yzi2ymi2jevhjfd3hf6w262e4
   '@typescript-eslint/parser': registry.npmmirror.com/@typescript-eslint/parser/5.60.0_7yfldhli4vs6yywnkyiujhawka
@@ -1646,6 +1650,14 @@ packages:
     resolution: {integrity: sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/range-parser/-/range-parser-1.2.4.tgz}
     name: '@types/range-parser'
     version: 1.2.4
+
+  registry.npmmirror.com/@types/request-ip/0.0.38:
+    resolution: {integrity: sha512-1yeq8UuK/tUBqLXRY24gjeFvrSNaGNcOcZLQjHlnuw8iu+qE/vTQ64TUcLWorr607NKLfFakdoYEXXHXrLLKCw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/request-ip/-/request-ip-0.0.38.tgz}
+    name: '@types/request-ip'
+    version: 0.0.38
+    dependencies:
+      '@types/node': registry.npmmirror.com/@types/node/20.3.1
+    dev: true
 
   registry.npmmirror.com/@types/semver/7.5.0:
     resolution: {integrity: sha512-G8hZ6XJiHnuhQKR7ZmysCeJWE08o8T0AXtk5darsCaTVsYZhhgUrq53jizaR2FvsoeCwJhlmwTjkXBY5Pn/ZHw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/semver/-/semver-7.5.0.tgz}
@@ -5891,6 +5903,12 @@ packages:
     version: 1.6.1
     engines: {node: '>=0.10'}
     dev: true
+
+  registry.npmmirror.com/request-ip/3.3.0:
+    resolution: {integrity: sha512-cA6Xh6e0fDBBBwH77SLJaJPBmD3nWVAcF9/XAcsrIHdjhFzFiB5aNQFytdjCGPezU3ROwrR11IddKAM08vohxA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/request-ip/-/request-ip-3.3.0.tgz}
+    name: request-ip
+    version: 3.3.0
+    dev: false
 
   registry.npmmirror.com/require-directory/2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/require-directory/-/require-directory-2.1.1.tgz}
