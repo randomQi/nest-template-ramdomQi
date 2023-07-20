@@ -1,5 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "../../user/entities/user.entity";
+import { Menu } from "../../menu/entities/menu.entity";
 @Entity()
 export class Role {
 
@@ -11,4 +12,7 @@ export class Role {
 
   @ManyToMany(() => User, (user) => user.role )
   user: User[]
+
+  // @ManyToMany(() => Menu, (menu) => menu.role)
+  // menu: Menu[]
 }

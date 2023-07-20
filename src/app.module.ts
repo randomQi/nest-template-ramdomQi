@@ -15,6 +15,7 @@ import { RolesModule } from './roles/roles.module';
 import { Role } from "./roles/entities/role.entity";
 import { Log } from "./logs/entities/log.entity";
 import { AuthModule } from './auth/auth.module';
+import { Menu } from "./menu/entities/menu.entity";
 @Module({
   imports: [UserModule, MenuModule, ConfigModule.forRoot({isGlobal: true, load: [Configuration]}),
     TypeOrmModule.forRootAsync({

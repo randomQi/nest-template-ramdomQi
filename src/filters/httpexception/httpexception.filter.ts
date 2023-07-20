@@ -9,12 +9,12 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const response = httpArgumentsHost.getResponse();
     // 获取异常状态码
     const status = exception.getStatus();
-
+    console.log('-----------------------------------------');
     // 定制统一异常响应数据结构体
-    response.json({
+    response.status(status).json({
       title: '统一制定的httpException异常响应的数据结构体',
       code: status,
-      timestamp: new Date().toDateString(),
+      timestamp: new Date().toISOString(),
       message: exception.message || exception.name
     })
   }

@@ -20,13 +20,15 @@ export class AuthService {
     }
   }
   async signup(dto: any) {
-    const { username } = dto
-    let promise = await this.userService.findOne({ username });
-    if (promise?.username === username) {
-      throw new ForbiddenException('用户名已存在')
-    }
+    // const { username } = dto
+    // let promise = await this.userService.findOne({ username });
+    // if (promise?.username === username) {
+    //   throw new ForbiddenException('用户名已存在')
+    // }
     dto.password = await argon2.hash(dto.password)
-    await this.userService.create(dto);
+     const promise = await this.userService.create(dto);
+    console.log(promise);
+    // this.userService.
     return '注册成功'
   }
 }
