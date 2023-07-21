@@ -10,6 +10,7 @@ specifiers:
   '@nestjs/passport': ^10.0.0
   '@nestjs/platform-express': ^10.0.0
   '@nestjs/platform-socket.io': ^10.1.0
+  '@nestjs/platform-ws': ^10.1.0
   '@nestjs/schematics': ^10.0.0
   '@nestjs/testing': ^10.0.0
   '@nestjs/typeorm': ^10.0.0
@@ -40,6 +41,7 @@ specifiers:
   reflect-metadata: ^0.1.13
   request-ip: ^3.3.0
   rxjs: ^7.8.1
+  socket.io: ^4.7.1
   source-map-support: ^0.5.21
   supertest: ^6.3.3
   ts-jest: ^29.1.0
@@ -58,6 +60,7 @@ dependencies:
   '@nestjs/passport': registry.npmmirror.com/@nestjs/passport/10.0.0_pywtletninsj67losigahzgyme
   '@nestjs/platform-express': registry.npmmirror.com/@nestjs/platform-express/10.0.3_uw5udq5dia6g3eu27qypsmjr7q
   '@nestjs/platform-socket.io': registry.npmmirror.com/@nestjs/platform-socket.io/10.1.0_eirdj3vmxb5o6adhvr5ig76eli
+  '@nestjs/platform-ws': registry.npmmirror.com/@nestjs/platform-ws/10.1.0_eirdj3vmxb5o6adhvr5ig76eli
   '@nestjs/typeorm': registry.npmmirror.com/@nestjs/typeorm/10.0.0_davvi73azlbbvn2qlqvryv6twy
   '@nestjs/websockets': registry.npmmirror.com/@nestjs/websockets/10.1.0_5gpyckn4exmyhuip2st3avvgru
   '@types/js-yaml': registry.npmmirror.com/@types/js-yaml/4.0.5
@@ -74,6 +77,7 @@ dependencies:
   reflect-metadata: registry.npmmirror.com/reflect-metadata/0.1.13
   request-ip: registry.npmmirror.com/request-ip/3.3.0
   rxjs: registry.npmmirror.com/rxjs/7.8.1
+  socket.io: registry.npmmirror.com/socket.io/4.7.1
   typeorm: registry.npmmirror.com/typeorm/0.3.17_amo3zwxalcysdjhsk2zeh25abe
 
 devDependencies:
@@ -1280,6 +1284,26 @@ packages:
       - bufferutil
       - supports-color
       - utf-8-validate
+
+  registry.npmmirror.com/@nestjs/platform-ws/10.1.0_eirdj3vmxb5o6adhvr5ig76eli:
+    resolution: {integrity: sha512-eFbNzVnwuJYL5RMFsFlYVx4rcQo+3aL+ocTCjaEtGZ/s7ojwC1IcuXYOq4T4OVu8iFYHedTMcaMRmd334B/v3g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@nestjs/platform-ws/-/platform-ws-10.1.0.tgz}
+    id: registry.npmmirror.com/@nestjs/platform-ws/10.1.0
+    name: '@nestjs/platform-ws'
+    version: 10.1.0
+    peerDependencies:
+      '@nestjs/common': ^10.0.0
+      '@nestjs/websockets': ^10.0.0
+      rxjs: ^7.1.0
+    dependencies:
+      '@nestjs/common': registry.npmmirror.com/@nestjs/common/10.0.3_j3td4gnlgk75ora6o6suo62byy
+      '@nestjs/websockets': registry.npmmirror.com/@nestjs/websockets/10.1.0_5gpyckn4exmyhuip2st3avvgru
+      rxjs: registry.npmmirror.com/rxjs/7.8.1
+      tslib: registry.npmmirror.com/tslib/2.6.0
+      ws: registry.npmmirror.com/ws/8.13.0
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+    dev: false
 
   registry.npmmirror.com/@nestjs/schematics/10.0.1_2dvg4rgxqo2ykoqe6i3cxatlua:
     resolution: {integrity: sha512-buxpYtSwOmWyf0nUJWJCkCkYITwbOfIEKHTnGS7sDbcfaajrOFXb5pPAGD2E1CUb3C1+NkQIURPKzs0IouZTQg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@nestjs/schematics/-/schematics-10.0.1.tgz}
@@ -7253,6 +7277,21 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
+
+  registry.npmmirror.com/ws/8.13.0:
+    resolution: {integrity: sha512-x9vcZYTrFPC7aSIbj7sRCYo7L/Xb8Iy+pW0ng0wt2vCJv7M9HOMy0UoN3rr+IFC7hb7vXoqS+P9ktyLLLhO+LA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/ws/-/ws-8.13.0.tgz}
+    name: ws
+    version: 8.13.0
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: '>=5.0.2'
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+    dev: false
 
   registry.npmmirror.com/xtend/4.0.2:
     resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/xtend/-/xtend-4.0.2.tgz}

@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import { HttpExceptionFilter } from "./filters/httpexception/httpexception.filter";
 import { ValidationPipe } from "@nestjs/common";
 import { AllExceptionFilter } from "./filters/allexceptionfilter/allexceptionfilter.filter";
-
+import { WsAdapter } from "@nestjs/platform-ws";
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
@@ -14,7 +14,8 @@ async function bootstrap() {
   const  httpAdapter  = app.get(HttpAdapterHost);
   app.useGlobalFilters(new AllExceptionFilter(httpAdapter))
   // app.useGlobalFilters(new HttpExceptionFilter())
-
+  app.enableCors()
+  // app.useWebSocketAdapter(new WsAdapter(app))
   await app.listen(3000,'0.0.0.0');
 
   let httpServer =  await app.getUrl();
