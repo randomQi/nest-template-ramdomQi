@@ -32,11 +32,12 @@ export class EventGateway {
   @SubscribeMessage('findOneEvent')
   findOne(@MessageBody() id: number) {
     const fileName = 'long.mp3'
-    const buffer = fs.readFileSync(path.join(process.cwd(),`/public/static/${fileName}`));
-    // setInterval(() =>
-      this.server.emit('stream', buffer)
-    // }, 3000)
-    // return this.eventService.findOne(id);
+    const buffer = fs.createReadStream(path.join(process.cwd(),`/public/static/${fileName}`));
+    buffer.on('data', (chunk:Buffer)=> {
+      if (chunk instanceof Buffer) {
+        this.server.emit('stream', chunk)
+      }
+    })
   }
 
   @SubscribeMessage('updateEvent')
