@@ -40,11 +40,49 @@ export class EventGateway {
     })
   }
 
-  @SubscribeMessage('updateEvent')
-  update(@MessageBody() updateEventDto: UpdateEventDto) {
+  /**
+   * 用户加入房间
+   * @param updateEventDto
+   */
+  @SubscribeMessage('join')
+  join(@MessageBody() updateEventDto: UpdateEventDto) {
+    return this.eventService.handleJoin(this.server, updateEventDto);
+  }
+
+  /**
+   * 用户离开房间
+   * @param updateEventDto
+   */
+  @SubscribeMessage('leave')
+  leave(@MessageBody() updateEventDto: UpdateEventDto) {
     return this.eventService.update(updateEventDto.id, updateEventDto);
   }
 
+  /**
+   * 连接断开
+   */
+  @SubscribeMessage('disconnect')
+  disconnect(){
+
+  }
+
+  /**
+   * 用户发送offer
+   * @param message
+   */
+  @SubscribeMessage('offer')
+  offer(@MessageBody() message){
+
+  }
+
+  /**
+   * 用户发送answer
+   * @param message
+   */
+  @SubscribeMessage('answer')
+  answer(@MessageBody() message){
+
+  }
   @SubscribeMessage('removeEvent')
   remove(@MessageBody() id: number) {
     return this.eventService.remove(id);
