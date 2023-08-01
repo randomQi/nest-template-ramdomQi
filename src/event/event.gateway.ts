@@ -13,13 +13,12 @@ export class EventGateway {
   roomList = []
   @WebSocketServer()
   server: Server
-  socket: Socket
+  socket: Map<string, Socket> = new Map<string, Socket>()
+  adminNum: string
   constructor(private readonly eventService: EventService) {}
-  handleConnection() {
-    this.server.on('connection', (socket) => {
-      socket.join('-1')
-      console.log('与服务器成功建立链接');
-    })
+  handleConnection(@ConnectedSocket() socket:Socket) {
+    socket.join('-1')
+    console.log('与服务器成功建立链接');
   }
   @SubscribeMessage('connect')
   create(@MessageBody() createEventDto: CreateEventDto) {
@@ -50,9 +49,12 @@ export class EventGateway {
    * @param client
    */
   @SubscribeMessage('join')
-  join(@MessageBody() updateEventDto: UpdateEventDto, @ConnectedSocket() client: Socket) {
-    client.join('-1')
-    return this.eventService.handleJoin(client, updateEventDto);
+  join(@MessageBody() updateEventDto: any, @ConnectedSocket() client: Socket) {
+    const {userId} = updateEventDto
+    this.adminNum = userId
+    if (!this.socket.get(userId)) {
+      this.socket.set(userId, client)
+    }
   }
 
   /**
@@ -79,7 +81,11 @@ export class EventGateway {
    */
   @SubscribeMessage('offer')
   offer(@MessageBody() message, @ConnectedSocket() client: Socket){
-    this.eventService.handleOffer(client, message)
+    // this.eventService.handleOffer(client, message)
+    // 获取当前接入客户端的socket信息
+    const {otherId} = message
+    const clientSocket = this.socket.get(otherId);
+    clientSocket.emit('offer', message)
   }
 
   /**
@@ -89,13 +95,22 @@ export class EventGateway {
    */
   @SubscribeMessage('answer')
   answer(@MessageBody() message, @ConnectedSocket() client: Socket){
-    this.eventService.handleAnswer(client, message)
+    // this.eventService.handleAnswer(client, message)
+    const {userId} = message
+    const adminClient = this.socket.get(userId)
+    adminClient.emit('answer', message)
+
   }
 
   @SubscribeMessage('otherJoin')
-  otherJoin(@MessageBody() message, @ConnectedSocket() client: Socket){
-    client.join('-1')
-    this.server.sockets.to('-1').emit('otherJoin', message)
+  otherJoin(@MessageBody() message: any, @ConnectedSocket() client: Socket){
+    const {userId} = message
+    if (!this.socket.get(userId)) {
+      this.socket.set(userId, client)
+    }
+    const adminSocket = this.socket.get(this.adminNum);
+    adminSocket.emit('otherJoin', message)
+    // this.server.sockets.to('-1').emit('otherJoin', message)
 
   }
   @SubscribeMessage('candidate')
