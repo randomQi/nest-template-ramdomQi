@@ -1,4 +1,4 @@
-import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from "@nestjs/common";
+import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from '@nestjs/common';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -15,7 +15,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       title: '统一制定的httpException异常响应的数据结构体',
       code: status,
       timestamp: new Date().toISOString(),
-      message: exception.message || exception.name
-    })
+      message: exception.message || exception.name,
+    });
   }
 }

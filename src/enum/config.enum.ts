@@ -4,5 +4,5 @@ export enum ConfigEnum {
   DB_USERNAME = 'username',
   DB_PASSWORD = 'password',
   DB_DATABASE = 'database',
-  DB_SYNC = 'sync'
+  DB_SYNC = 'sync',
 }

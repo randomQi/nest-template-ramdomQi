@@ -1,23 +1,21 @@
-import { Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { User } from "./entities/user.entity";
-import { Repository } from "typeorm";
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from './entities/user.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
-
-  constructor(@InjectRepository(User) private  readonly userRepository: Repository<User>) {
-  }
+  constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) {}
   async create(createUserDto: Partial<User>): Promise<any> {
-      const user = this.userRepository.create(createUserDto);
-      return await this.userRepository.save(user)
+    const user = this.userRepository.create(createUserDto);
+    return await this.userRepository.save(user);
   }
 
-  findAll(username:string):Promise<User[]> {
-    return this.userRepository.find({ where: {username}});
+  findAll(username: string): Promise<User[]> {
+    return this.userRepository.find({ where: { username } });
   }
 
-  async findOne(parm: Partial<{ id: number, username: string }>):Promise<User> {
+  async findOne(parm: Partial<{ id: number; username: string }>): Promise<User> {
     return await this.userRepository.findOne({ where: parm });
   }
 
@@ -30,6 +28,6 @@ export class UserService {
   }
 
   getUserProfile(id: number) {
-    return this.userRepository.findOne({where: {id}, relations: {profile: true}})
+    return this.userRepository.findOne({ where: { id }, relations: { profile: true } });
   }
 }
