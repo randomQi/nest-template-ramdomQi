@@ -1,10 +1,10 @@
   mysql:
     host: '127.0.0.1'
     port: 3306
-    database: 'nest-dev'
+    database: 'db'
     username: 'root'
     password: '123456'
-    sync: false
+    sync: true
 
   mysql2:
     host: '127.0.0.1'

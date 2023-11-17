@@ -1,18 +1,39 @@
-import { Column, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Role } from '../../roles/entities/role.entity';
 
+@Entity()
 export class Menu {
   @PrimaryGeneratedColumn()
   id: string;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+    length: 255,
+    nullable: false,
+    default: '',
+    comment: '菜单名称',
+    name: 'name',
+  })
+  name: string;
+  @Column({
+    type: 'varchar',
+    length: 255,
+    nullable: false,
+    default: '',
+    comment: '菜单路径',
+    name: 'path',
+  })
   path: string;
-  @Column()
-  order: number;
-  @Column()
-  acl: string;
+  @Column({
+    type: 'varchar',
+    length: 255,
+    nullable: false,
+    default: '',
+    comment: '菜单图标',
+    name: 'icon',
+  })
+  icon: string;
 
-  // @ManyToMany(() => Role, (role) =>role.menu)
-  // @JoinTable({name: 'role_menus'})
-  // role: Role[]
+  @ManyToMany(() => Role, (role) => role.menus)
+  roles: Role[];
 }

@@ -8,10 +8,23 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({
+    unique: false,
+    nullable: false,
+    type: 'varchar',
+    length: 50,
+    name: 'username',
+    comment: '用户名',
+  })
   username: string;
 
-  @Column()
+  @Column({
+    unique: false,
+    nullable: false,
+    type: 'varchar',
+    name: 'password',
+    comment: '密码',
+  })
   password: string;
 
   @OneToOne(() => Profile, (profile) => profile.user)

@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from '../../user/entities/user.entity';
 import { Menu } from '../../menu/entities/menu.entity';
 @Entity()
@@ -6,12 +6,30 @@ export class Role {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+    length: 20,
+    nullable: false,
+    unique: true,
+    comment: '角色名称',
+    name: 'name',
+  })
   name: string;
 
   @ManyToMany(() => User, (user) => user.role)
   user: User[];
 
-  // @ManyToMany(() => Menu, (menu) => menu.role)
-  // menu: Menu[]
+  @Column({
+    type: 'varchar',
+    nullable: false,
+    default: '',
+    select: false,
+    comment: '角色描述',
+    name: 'description',
+  })
+  description: string;
+
+  @JoinTable({ name: 'role_menu' })
+  @ManyToMany(() => Menu, (menu) => menu.roles)
+  menus: Menu[];
 }

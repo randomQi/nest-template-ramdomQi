@@ -11,8 +11,8 @@ export class UserService {
     return await this.userRepository.save(user);
   }
 
-  findAll(username: string): Promise<User[]> {
-    return this.userRepository.find({ where: { username } });
+  findAll(): Promise<User[]> {
+    return this.userRepository.find();
   }
 
   async findOne(parm: Partial<{ id: number; username: string }>): Promise<User> {

@@ -20,7 +20,6 @@ import { EventModule } from './event/event.module';
 @Module({
   imports: [
     UserModule,
-    MenuModule,
     ConfigModule.forRoot({ isGlobal: true, load: [Configuration] }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -35,7 +34,7 @@ import { EventModule } from './event/event.module';
           database: configService.get('mysql')[ConfigEnum.DB_DATABASE],
           synchronize: configService.get('mysql')[ConfigEnum.DB_SYNC],
           logging: ['error'],
-          entities: [User, Profile, Role, Log],
+          entities: [User, Profile, Role, Log, Menu],
         };
       },
     }),
@@ -53,6 +52,7 @@ import { EventModule } from './event/event.module';
     ProfileModule,
     LogsModule,
     RolesModule,
+    MenuModule,
     AuthModule,
     EventModule,
   ],
